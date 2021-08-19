@@ -1,5 +1,5 @@
 <resources>
 //...........Activity 1..................//
-    <string name="app_name" translatable="false">НМедиа</string>
-    <string name="НМЕДИА" translatable="false">НМедиа!</string>
+    <string name="app_name" >НМедиа</string>
+    <string name="NMedia"  > НМедиа!</string>
 </resources>
