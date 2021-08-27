@@ -1,8 +1,8 @@
 package ru.netology.nmedia.dto
 
-data class Post (
+data class Post(
     var id: Int,
-    var author: String,
+    var author:String,
     var content: String,
     var published: String,
     var likedByMe: Boolean = false,
@@ -12,6 +12,7 @@ data class Post (
     var viewing: Int,
     var viewingByMe: Boolean = false,
 )
+
 
 
 
