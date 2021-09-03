@@ -2,7 +2,7 @@ package ru.netology.nmedia.dto
 
  class Wallsevice {
 
-     fun notZeroShare(share: Int) = when (share) {
+     fun notZeroShare(share: Long) = when (share) {
          in 0..999 -> share
          in 1_000..9_999 -> share/10_000.toDouble()
          in 10_000..99_999 -> share/10_000
@@ -11,7 +11,7 @@ package ru.netology.nmedia.dto
     else ->share
      }
 
-     fun zeroingOutShare(share: Int) = when (share) {
+     fun zeroingOutShare(share: Long) = when (share) {
          in 0..999 -> share
          in 1_000..9_999 -> "${this.notZeroShare(share)} К"
          in 10_000..99_999 -> "${this.notZeroShare(share)} К"
@@ -29,7 +29,7 @@ package ru.netology.nmedia.dto
          else ->likes
      }
 
-     fun zeroingOutLikes(likes: Int) = when (likes) {
+     fun zeroingOutLikes(likes: Long) = when (likes) {
          in 0..999 -> likes
          in 1_000..9_999 -> "${this.notZeroShare(likes)} К"
          in 10_000..99_999 -> "${this.notZeroShare(likes)} К"
@@ -37,11 +37,6 @@ package ru.netology.nmedia.dto
          in 1_000_000..100_000_000 ->"${this.notZeroShare(likes)} М"
          else ->likes
      }
-
-
-
-
-
  }
 
 
