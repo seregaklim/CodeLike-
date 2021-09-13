@@ -17,8 +17,6 @@ interface OnInteractionListener {
     fun onShare(post: Post) {}
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
-
-    fun onCanselContentn(post: Post) {}
 }
 
 class PostsAdapter(
@@ -34,7 +32,9 @@ class PostsAdapter(
         holder.bind(post)
     }
 }
+
 val service = Wallsevice()
+
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
@@ -46,18 +46,11 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
 
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+            like.isChecked = post.likedByMe
+            like.text = "${service.zeroingOutLikes(post.likes)}"
 
-            )
-            share.setImageResource(
-                if (post.shareByMe) R.drawable.ic_share_24 else R.drawable.ic_share_24
-            )
-
-            shareCount?.text = service.zeroingOutShare(post.share).toString()
-
-
-            likeCount?.text = service.zeroingOutLikes(post.likes).toString()
+            share.isChecked
+            share.text = "${service.zeroingOutShare(post.share)}"
 
 
             menu.setOnClickListener {
@@ -89,9 +82,7 @@ class PostViewHolder(
             }
 
 
-
-
-                }
+        }
     }
 
     class PostDiffCallback() : DiffUtil.ItemCallback<Post>(), Parcelable {
