@@ -14,5 +14,8 @@
     <string name="edit_message">Редактируемое сообщение</string>
     <string name="canselButtum">Отмена редактирования</string>
     <string name="Edit">Редактор</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="chooser_share_post">Поделиться постом</string>
+    <string name="cansel">Отмена</string>
 
 </resources>

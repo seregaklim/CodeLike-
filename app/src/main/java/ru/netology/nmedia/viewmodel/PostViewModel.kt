@@ -18,6 +18,10 @@ private val empty = Post(
 )
 
 class PostViewModel : ViewModel() {
+
+
+
+
     // упрощённый вариант
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
     val data = repository.getAll()
@@ -48,6 +52,18 @@ class PostViewModel : ViewModel() {
 
     fun  canselContentById(id: Long) = repository. canselContentById(id)
 
+
+    fun canselContent(content: String) {
+        val text = content.trim()
+        if (edited.value?.content == text) {
+            return
+        }
+        edited.value = edited.value?.copy(content = content)
+    }
+
+}
+
+//
 //    fun canselContent(content: String) {
 //        val text = content.trim()
 //        if (edited.value?.content == text) {
@@ -55,5 +71,3 @@ class PostViewModel : ViewModel() {
 //        }
 //        edited.value = edited.value?.copy(content =content )
 //    }
-
-}
