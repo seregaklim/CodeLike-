@@ -13,17 +13,6 @@ class NewPostActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.edit.requestFocus();
 
-        binding.canselButtum.setOnClickListener {
-
-            with(binding.edit) {
-                if (text.isNullOrBlank()) {
-
-                    canselContentById(id.toLong())
-
-                }
-                finish()
-            }
-
             binding.ok.setOnClickListener {
                 val intent = Intent()
                 if (binding.edit.text.isNullOrBlank()) {
@@ -38,7 +27,3 @@ class NewPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun canselContentById(toLong: Long) {
-
-    }
-}

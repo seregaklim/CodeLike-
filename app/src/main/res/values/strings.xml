@@ -16,4 +16,6 @@
     <string name="add_post">Add post</string>
     <string name="chooser_share_post">Chare post</string>
     <string name="cansel">Cansel</string>
+    <string name="playVideo">Play Video</string>
+    <string name="addVideo">Add Video</string>
 </resources>

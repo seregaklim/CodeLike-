@@ -11,5 +11,6 @@ interface PostRepository {
     fun removeById(id: Long)
 
 
+
     fun canselContentById(id: Long)
 }

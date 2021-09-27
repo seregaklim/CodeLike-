@@ -15,12 +15,10 @@ private val empty = Post(
     likes = 0,
     share = 0,
     viewing = 0,
-)
+    video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    )
 
 class PostViewModel : ViewModel() {
-
-
-
 
     // упрощённый вариант
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
@@ -34,8 +32,8 @@ class PostViewModel : ViewModel() {
         edited.value = empty
     }
 
-    fun edit(post: Post) {
-        edited.value = post
+    fun edit(result: String) {
+        edited.value = empty
     }
 
     fun changeContent(content: String) {
@@ -50,8 +48,16 @@ class PostViewModel : ViewModel() {
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
 
-    fun  canselContentById(id: Long) = repository. canselContentById(id)
+    fun addVideo(video: String) {
+        val text = video.trim()
+        if (edited.value?.video == text) {
+            return
+        }
+        edited.value = edited.value?.copy(video = text)
+    }
 
+
+    fun  canselContentById(id: Long) = repository. canselContentById(id)
 
     fun canselContent(content: String) {
         val text = content.trim()
@@ -62,12 +68,3 @@ class PostViewModel : ViewModel() {
     }
 
 }
-
-//
-//    fun canselContent(content: String) {
-//        val text = content.trim()
-//        if (edited.value?.content == text) {
-//            return
-//        }
-//        edited.value = edited.value?.copy(content =content )
-//    }

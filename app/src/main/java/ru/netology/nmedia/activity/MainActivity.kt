@@ -1,7 +1,9 @@
 
 package ru.netology.nmedia.activity
 
+import NewVideoResultContract
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.launch
 import androidx.activity.viewModels
@@ -13,7 +15,6 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-
 class MainActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +25,18 @@ class MainActivity() : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
 
         val adapter = PostsAdapter(object : OnInteractionListener {
+
+
+            val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
+                result ?: return@registerForActivityResult
+                viewModel.edit(result)
+            }
+
+
             override fun onEdit(post: Post) {
-                viewModel.edit(post)
+                editPostLauncher.launch(post.content)
+               // viewModel.edit(result)
+
             }
 
             override fun onLike(post: Post) {
@@ -35,6 +46,29 @@ class MainActivity() : AppCompatActivity() {
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
+            override fun onPlayVideo(post: Post) {
+
+                val intent = Intent().apply {
+
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setPackage("com.google.android.youtube")
+                    intent.data = Uri.parse("${post.video}")
+                }
+                startActivity(intent)
+            }
+
+            val newVideoLauncher = registerForActivityResult(NewVideoResultContract()) { result ->
+                result ?: return@registerForActivityResult
+                viewModel.addVideo(result)
+
+            }
+
+            override fun onAddVideo(post: Post){
+
+                // viewModel.addVideo(post.toString())
+                newVideoLauncher.launch()
+            }
+
 
             override fun onShare(post: Post) {
                 val intent = Intent().apply {
@@ -56,37 +90,53 @@ class MainActivity() : AppCompatActivity() {
         }
 
 
+
+
         val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result ?: return@registerForActivityResult
             viewModel.changeContent(result)
             viewModel.save()
-      viewModel.canselContent(String())
         }
 
         binding.fab.setOnClickListener {
             newPostLauncher.launch()
         }
 
-        val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
 
-            viewModel.changeContent(result)
-            viewModel.save()
-
-
-        }
-
-        viewModel.edited.observe(this) { post ->
-            if (post.id == 0L) {
-                return@observe
-            }
-            post.content
-            editPostLauncher.launch()
-        }
     }
-
 }
 
+
+//
+//        val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
+//            result ?: return@registerForActivityResult
+//            viewModel.save()
+//            viewModel.changeContent(result)
+//
+//        }
+//
+//        viewModel.edited.observe(this) { post ->
+//            if (post.id == 0L) {
+//                return@observe
+//            }
+//            editPostLauncher.launch(post.content)
+//        }
+
+
+//        val intent = Intent(Intent.ACTION_VIEW)
+//
+//        intent.setPackage("com.google.android.youtube")
+//        intent.data = Uri.parse("https://www.youtube.com/watch?v=WhWc3b3KhnY")
+//
+//        startActivity(intent)
+
+
+
+
+
+//video.setVideoURI(Uri.parse("url"))
+//videoView.requestFocus()
+//videoView.start()
 
 
 

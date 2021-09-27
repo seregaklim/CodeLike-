@@ -17,6 +17,10 @@ interface OnInteractionListener {
     fun onShare(post: Post) {}
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
+    fun onPlayVideo(post: Post){}
+    fun onAddVideo(post: Post){}
+
+
 }
 
 class PostsAdapter(
@@ -66,11 +70,19 @@ class PostViewHolder(
                                 onInteractionListener.onEdit(post)
                                 true
                             }
+                            R.id.addVideo -> {
+                                onInteractionListener.onAddVideo(post)
+                                true
+                            }
 
                             else -> false
                         }
                     }
                 }.show()
+            }
+
+            playVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
             }
 
             like.setOnClickListener {
@@ -80,7 +92,8 @@ class PostViewHolder(
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-
+            playVideo.setOnClickListener{
+            }
 
         }
     }

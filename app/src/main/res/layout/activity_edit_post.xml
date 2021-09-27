@@ -30,14 +30,6 @@
         app:layout_anchor="@id/bottomAppBar"
         app:srcCompat="@drawable/ic_ok_24dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/canselButtum"
-        android:layout_width="169dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/cansel"
-        app:layout_anchor="@+id/bottomAppBar"
-        app:layout_anchorGravity="end|top"
-        app:srcCompat="@android:drawable/ic_delete" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

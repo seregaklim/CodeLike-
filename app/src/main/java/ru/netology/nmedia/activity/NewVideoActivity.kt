@@ -2,26 +2,18 @@ package ru.netology.nmedia.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.databinding.ActivityEditPostBinding
+import android.os.Bundle
 import ru.netology.nmedia.databinding.ActivityNewPostBinding
+import ru.netology.nmedia.databinding.ActivityNewVideoBinding
 
-class EditPostActivity : AppCompatActivity() {
 
-
+class  NewVideoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityEditPostBinding.inflate(layoutInflater)
+        val binding = ActivityNewVideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val text=  intent?.getStringExtra("post.content")
-
-        binding.edit.setText(text)
-
-
+        binding.edit.requestFocus();
 
         binding.ok.setOnClickListener {
             val intent = Intent()
