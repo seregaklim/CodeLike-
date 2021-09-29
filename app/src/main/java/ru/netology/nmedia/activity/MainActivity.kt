@@ -30,12 +30,11 @@ class MainActivity() : AppCompatActivity() {
             val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
                 result ?: return@registerForActivityResult
                 viewModel.edit(result)
+
             }
 
-
-            override fun onEdit(post: Post) {
+            override fun onEdit (post: Post) {
                 editPostLauncher.launch(post.content)
-               // viewModel.edit(result)
 
             }
 
@@ -50,7 +49,7 @@ class MainActivity() : AppCompatActivity() {
 
                 val intent = Intent().apply {
 
-                    val intent = Intent(Intent.ACTION_VIEW)
+                     action = Intent.ACTION_VIEW
                     intent.setPackage("com.google.android.youtube")
                     intent.data = Uri.parse("${post.video}")
                 }
@@ -64,8 +63,6 @@ class MainActivity() : AppCompatActivity() {
             }
 
             override fun onAddVideo(post: Post){
-
-                // viewModel.addVideo(post.toString())
                 newVideoLauncher.launch()
             }
 

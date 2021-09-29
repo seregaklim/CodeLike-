@@ -81,9 +81,6 @@ class PostViewHolder(
                 }.show()
             }
 
-            playVideo.setOnClickListener {
-                onInteractionListener.onPlayVideo(post)
-            }
 
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -93,6 +90,7 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
             playVideo.setOnClickListener{
+                onInteractionListener.onPlayVideo(post)
             }
 
         }

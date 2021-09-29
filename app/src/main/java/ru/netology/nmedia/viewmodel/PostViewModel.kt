@@ -31,10 +31,10 @@ class PostViewModel : ViewModel() {
         }
         edited.value = empty
     }
+   fun edit(result: String) {
+            edited.value = empty
+        }
 
-    fun edit(result: String) {
-        edited.value = empty
-    }
 
     fun changeContent(content: String) {
         val text = content.trim()
@@ -55,16 +55,16 @@ class PostViewModel : ViewModel() {
         }
         edited.value = edited.value?.copy(video = text)
     }
-
-
-    fun  canselContentById(id: Long) = repository. canselContentById(id)
-
-    fun canselContent(content: String) {
-        val text = content.trim()
-        if (edited.value?.content == text) {
-            return
-        }
-        edited.value = edited.value?.copy(content = content)
-    }
-
 }
+//
+//    fun  canselContentById(id: Long) = repository. canselContentById(id)
+//
+//    fun canselContent(content: String) {
+//        val text = content.trim()
+//        if (edited.value?.content == text) {
+//            return
+//        }
+//        edited.value = edited.value?.copy(content = content)
+//    }
+
+

@@ -17,10 +17,11 @@ class EditPostResultContract : ActivityResultContract< String, String?>(){
             putExtra("post.content", input)
         }
     }
-
-        override fun parseResult(resultCode: Int, intent: Intent?): String? {
-            TODO("Not yet implemented")
-
+    override fun parseResult(resultCode: Int, intent: Intent?): String? =
+        if (resultCode == Activity.RESULT_OK) {
+            intent?.getStringExtra(Intent.EXTRA_TEXT)
+        } else {
+            null
         }
     }
 
