@@ -20,7 +20,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             0,
             "https://www.youtube.com/watch?v=WhWc3b3KhnY",
 
-        ),
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -45,7 +45,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             0,
             "https://www.youtube.com/watch?v=WhWc3b3KhnY",
 
-        ),
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -70,7 +70,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             0,
             "https://www.youtube.com/watch?v=WhWc3b3KhnY",
 
-        ),
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -83,7 +83,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             0,
             "https://www.youtube.com/watch?v=WhWc3b3KhnY",
 
-        ),
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -120,7 +120,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             0,
             "",
 
-        )
+            )
     ).reversed()
 
     private val data = MutableLiveData(posts)
@@ -171,14 +171,14 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
-
-
-    override fun canselContentById(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it else it
-        }
-        data.value = posts
-    }
-
 }
+
+//    override fun canselContentById(id: Long) {
+//        posts = posts.map {
+//            if (it.id != id) it else it
+//        }
+//        data.value = posts
+//    }
+
+
 

@@ -1,4 +1,3 @@
-
 package ru.netology.nmedia.activity
 
 import NewVideoResultContract
@@ -15,12 +14,28 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-class MainActivity() : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        run {
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            preferences.edit().apply {
+//                putString("key", "value") // putX
+//                commit() // commit - синхронно, apply - асинхронно
+//            }
+//        }
+//
+//        run {
+//            getPreferences(Context.MODE_PRIVATE)
+//                .getString("key", "no value")?.let {
+//                    Snackbar.make(binding.root, it, BaseTransientBottomBar.LENGTH_INDEFINITE)
+//                        .show()
+//                }
+//        }
 
         val viewModel: PostViewModel by viewModels()
 
@@ -49,7 +64,7 @@ class MainActivity() : AppCompatActivity() {
 
                 val intent = Intent().apply {
 
-                     action = Intent.ACTION_VIEW
+                    action = Intent.ACTION_VIEW
                     intent.setPackage("com.google.android.youtube")
                     intent.data = Uri.parse("${post.video}")
                 }
@@ -104,6 +119,7 @@ class MainActivity() : AppCompatActivity() {
 }
 
 
+
 //
 //        val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
 //            result ?: return@registerForActivityResult
@@ -134,9 +150,6 @@ class MainActivity() : AppCompatActivity() {
 //video.setVideoURI(Uri.parse("url"))
 //videoView.requestFocus()
 //videoView.start()
-
-
-
 
 //
 //
@@ -230,3 +243,5 @@ class MainActivity() : AppCompatActivity() {
 //
 //    }
 //}
+
+

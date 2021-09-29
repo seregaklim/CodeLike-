@@ -1,7 +1,5 @@
 package ru.netology.nmedia.adapter
-import android.os.Parcel
-import android.os.Parcelable
-import ru.netology.nmedia.dto.Wallsevice
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -11,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.dto.Wallsevice
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -19,10 +18,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
     fun onPlayVideo(post: Post){}
     fun onAddVideo(post: Post){}
-
-
 }
-
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostViewHolder.PostDiffCallback()) {
@@ -38,7 +34,6 @@ class PostsAdapter(
 }
 
 val service = Wallsevice()
-
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
@@ -89,13 +84,12 @@ class PostViewHolder(
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-            playVideo.setOnClickListener{
+            playVideo.setOnClickListener {
                 onInteractionListener.onPlayVideo(post)
             }
 
         }
     }
-
 
     class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
@@ -106,8 +100,4 @@ class PostViewHolder(
             return oldItem == newItem
         }
     }
-
 }
-
-
-
