@@ -19,7 +19,7 @@ private val empty = Post(
     share = 0,
     viewing = 0,
     video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
-    )
+)
 
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,9 +36,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun edit(result: String) {
-        edited.value = empty
+      edited.value?.copy(content = result)
     }
-
 
     fun changeContent(content: String) {
         val text = content.trim()
@@ -57,7 +56,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         if (edited.value?.video == text) {
             return
         }
-        edited.value = edited.value?.copy(video = text)
+        edited.value?.copy(video = text)
     }
 }
 
