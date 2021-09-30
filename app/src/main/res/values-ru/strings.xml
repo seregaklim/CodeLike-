@@ -12,11 +12,12 @@
     <string name="post_text">Текст поста</string>
     <string name="error_empty_content">Контент не может быть пустым</string>
     <string name="edit_message">Редактируемое сообщение</string>
-    <string name="canselButtum">Отмена редактирования</string>
     <string name="Edit">Редактор</string>
     <string name="add_post">Добавить пост</string>
     <string name="chooser_share_post">Поделиться постом</string>
     <string name="cansel">Отмена</string>
     <string name="playVideo">Включить видео</string>
     <string name="addVideo">Добавить видео</string>
+    <string name="action_feedFragment_to_newVideoFragment">Добавить видео</string>
+    <item name="action_feedFragment_to_newVideoFragment" type="id" />
 </resources>

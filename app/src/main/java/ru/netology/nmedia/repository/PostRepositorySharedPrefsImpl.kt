@@ -63,6 +63,9 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
+
+
+
     override fun shareById(id: Long) {
         posts = posts.map {
             if (it.id != id) it

@@ -85,7 +85,7 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
             playVideo.setOnClickListener {
-                onInteractionListener.onPlayVideo(post)
+                onInteractionListener.onPlayVideo( post)
             }
 
         }

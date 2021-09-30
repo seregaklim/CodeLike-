@@ -10,7 +10,7 @@ data class Post(
     var likes: Long,
     var share: Long,
     val viewing: Long,
-   val video:String,
+    val video:String,
 
     )
 

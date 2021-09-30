@@ -11,11 +11,14 @@
     <string name="menu_edit">Edit</string>
     <string name="error_empty_content">Content can\'t be empty</string>
     <string name="edit_message">Edit message</string>
-    <string name="canselButtum">Cansel</string>
     <string name="Edit">Редактор</string>
     <string name="add_post">Add post</string>
     <string name="chooser_share_post">Chare post</string>
     <string name="cansel">Cansel</string>
     <string name="playVideo">Play Video</string>
     <string name="addVideo">Add Video</string>
+    <string name="action_feedFragment_to_newVideoFragment">Add Video</string>
+
+    <item name="action_feedFragment_to_newVideoFragment" type="id" />
+    <item name="action_feedFragment_to_newEditFragment" type="id" />
 </resources>
