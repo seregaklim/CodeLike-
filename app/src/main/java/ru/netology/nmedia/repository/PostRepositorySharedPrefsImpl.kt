@@ -71,15 +71,15 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
-    override fun edit(post: Post, ) {
+    override fun edit(post: Post ) {
         posts = listOf(
             post.copy(
-                content = ""
+
             )
         )
 
         data.value = posts
-
+        sync()
 
 
         posts = posts.map {
@@ -87,13 +87,14 @@ class PostRepositorySharedPrefsImpl(
                 content = post.content)
         }
         data.value = posts
-
+        sync()
+         return
     }
 
     override fun addVideo(post: Post) {
         posts = listOf(
             post.copy(
-                video = ""
+
             )
         )
 
@@ -107,6 +108,7 @@ class PostRepositorySharedPrefsImpl(
         }
         data.value = posts
         sync()
+
     }
 
     private fun sync() {

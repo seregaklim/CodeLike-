@@ -58,10 +58,10 @@ class PostRepositoryFileImpl(
         sync()
     }
 
-    override fun edit(post: Post, ) {
+    override fun edit(post: Post ) {
         posts = listOf(
             post.copy(
-                content = ""
+
             )
         )
 
@@ -80,7 +80,7 @@ class PostRepositoryFileImpl(
     override fun addVideo(post: Post) {
         posts = listOf(
             post.copy(
-                video = ""
+
             )
         )
 

@@ -148,10 +148,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 
-override fun edit(post: Post, ) {
+override fun edit(post: Post ) {
     posts = listOf(
         post.copy(
-            content = ""
+
         )
     )
 
@@ -192,7 +192,7 @@ override fun edit(post: Post, ) {
     override fun addVideo(post: Post) {
         posts = listOf(
             post.copy(
-                video = ""
+
             )
         )
 
