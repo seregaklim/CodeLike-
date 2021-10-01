@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
 
             val newVideoLauncher = registerForActivityResult(NewVideoResultContract()) { result ->
                 result ?: return@registerForActivityResult
-                viewModel.addVideo(result)
-
+                viewModel.addVideo()
+                viewModel.changeContent(result)
             }
 
             override fun onAddVideo(post: Post){

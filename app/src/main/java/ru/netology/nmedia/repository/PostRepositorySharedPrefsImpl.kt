@@ -71,12 +71,43 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
-    override fun edit(post: String) {
-        if (post.id ==post.id)  else post.copy(content = post.content)
+    override fun edit(post: Post, ) {
+        posts = listOf(
+            post.copy(
+                content = ""
+            )
+        )
+
+        data.value = posts
+
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content)
+        }
+        data.value = posts
+
+    }
+
+    override fun addVideo(post: Post) {
+        posts = listOf(
+            post.copy(
+                video = ""
+            )
+        )
+
+        data.value = posts
+        sync()
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video)
+        }
         data.value = posts
         sync()
     }
-
 
     private fun sync() {
         with(prefs.edit()) {

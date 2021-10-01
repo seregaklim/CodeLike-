@@ -58,7 +58,15 @@ class PostRepositoryFileImpl(
         sync()
     }
 
-    override fun edit(post: String) {
+    override fun edit(post: Post, ) {
+        posts = listOf(
+            post.copy(
+                content = ""
+            )
+        )
+
+        data.value = posts
+        sync()
 
 
         posts = posts.map {
@@ -69,6 +77,24 @@ class PostRepositoryFileImpl(
         sync()
     }
 
+    override fun addVideo(post: Post) {
+        posts = listOf(
+            post.copy(
+                video = ""
+            )
+        )
+
+        data.value = posts
+        sync()
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video)
+        }
+        data.value = posts
+        sync()
+    }
 
     override fun likeById(id: Long) {
         posts = posts.map {
