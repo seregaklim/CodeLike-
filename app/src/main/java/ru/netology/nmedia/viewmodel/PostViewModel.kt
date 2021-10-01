@@ -5,8 +5,6 @@ import androidx.lifecycle.*
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryFileImpl
-import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
-import ru.netology.nmedia.repository.PostRepositorySharedPrefsImpl
 
 private val empty = Post(
     id = 0,
@@ -34,11 +32,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-
-    fun edit(result: String) {
+    fun edit(){
+        edited.value?.let {
+            repository.edit(it.content)
+        }
         edited.value = empty
     }
-
 
     fun changeContent(content: String) {
         val text = content.trim()

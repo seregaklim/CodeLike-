@@ -7,6 +7,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.dto.Post
 
+
+
 class PostRepositoryFileImpl(
     private val context: Context,
 ) : PostRepository {
@@ -55,6 +57,18 @@ class PostRepositoryFileImpl(
         data.value = posts
         sync()
     }
+
+    override fun edit(post: String) {
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content)
+        }
+        data.value = posts
+        sync()
+    }
+
 
     override fun likeById(id: Long) {
         posts = posts.map {

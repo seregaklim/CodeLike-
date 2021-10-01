@@ -147,7 +147,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+    override fun edit(post: String) {
+        if (post.id ==post.id)  else post.copy(content = post.content)
+        data.value = posts
 
+    }
 
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }

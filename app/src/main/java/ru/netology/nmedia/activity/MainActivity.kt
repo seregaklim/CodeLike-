@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
 
             val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
                 result ?: return@registerForActivityResult
-                viewModel.edit(result)
-
+                viewModel.changeContent(result)
+                viewModel.edit()
             }
 
             override fun onEdit (post: Post) {

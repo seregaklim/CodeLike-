@@ -71,7 +71,11 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
-
+    override fun edit(post: String) {
+        if (post.id ==post.id)  else post.copy(content = post.content)
+        data.value = posts
+        sync()
+    }
 
 
     private fun sync() {
