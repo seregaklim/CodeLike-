@@ -1,3 +1,4 @@
+
 package ru.netology.nmedia.viewmodel
 
 import android.app.Application
@@ -33,10 +34,13 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = empty
     }
 
-    fun edit(text: String) {
-        edited.value = edited.value?.copy(content = text)
-
+    fun edit() {
+        edited.value?.let {
+            repository.edit(it)
+        }
+        edited.value = empty
     }
+
     fun changeContent(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
@@ -49,15 +53,24 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
 
-    fun addVideo(video: String) {
+    fun addVideo() {
+
+        edited.value?.let {
+            repository.addVideo(it)
+        }
+        edited.value = empty
+    }
+    fun changeVideo(video: String) {
         val text = video.trim()
         if (edited.value?.video == text) {
             return
         }
-        edited.value?.copy(video = text)
+        edited.value = edited.value?.copy(video = text)
     }
-}
 
+
+
+}
 
 
 
@@ -130,11 +143,3 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //    }
 //}
 
-//
-//fun edit(post: Post) {
-//    edited.value?.copy(content = )
-//    edited.value = post
-//    edited.value?.let {
-//        repository.save(it.content)
-//    }
-//}

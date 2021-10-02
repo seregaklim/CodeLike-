@@ -7,6 +7,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.dto.Post
 
+
+
 class PostRepositoryFileImpl(
     private val context: Context,
 ) : PostRepository {
@@ -30,6 +32,7 @@ class PostRepositoryFileImpl(
             sync()
         }
     }
+
     // для презентации убрали пустые строки
     override fun getAll(): LiveData<List<Post>> = data
 
@@ -56,6 +59,43 @@ class PostRepositoryFileImpl(
         sync()
     }
 
+    override fun edit(post: Post) {
+        posts = listOf(
+            post.copy(
+
+            )
+        )
+        data.value = posts
+        sync()
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content
+            )
+        }
+        data.value = posts
+        sync()
+    }
+
+    override fun addVideo(post: Post) {
+        posts = listOf(
+            post.copy(
+
+            )
+        )
+
+        data.value = posts
+        sync()
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video
+            )
+        }
+        data.value = posts
+        sync()
+    }
+
     override fun likeById(id: Long) {
         posts = posts.map {
             if (it.id != id) it else it.copy(
@@ -72,6 +112,7 @@ class PostRepositoryFileImpl(
         data.value = posts
         sync()
     }
+
     override fun shareById(id: Long) {
         posts = posts.map {
             if (it.id != id) it
@@ -80,6 +121,7 @@ class PostRepositoryFileImpl(
         data.value = posts
         sync()
     }
+
     private fun sync() {
         context.openFileOutput(filename, Context.MODE_PRIVATE).bufferedWriter().use {
             it.write(gson.toJson(posts))

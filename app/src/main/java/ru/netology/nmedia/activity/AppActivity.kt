@@ -26,14 +26,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             }
             intent.removeExtra(Intent.EXTRA_TEXT)
             findNavController(R.id.nav_host_fragment).navigate(
-                R.id.action_feedFragment_to_newPostFragment,
-                Bundle().apply {
-                    textArg = text
-                }
-            )
-            intent.removeExtra(Intent.EXTRA_TEXT)
-            findNavController(R.id.nav_host_fragment).navigate(
-                R.id.action_feedFragment_to_newEditFragment,
+                R.id.actionFeedFragmentToNewPostFragment,
                 Bundle().apply {
                     textArg = text
                 }
@@ -41,7 +34,14 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 
             intent.removeExtra(Intent.EXTRA_TEXT)
             findNavController(R.id.nav_host_fragment).navigate(
-                R.id.action_feedFragment_to_newVideoFragment,
+                R.id.actionFeedFragmentToEditPostFragment,
+                Bundle().apply {
+                    textArg = text }
+            )
+
+            intent.removeExtra(Intent.EXTRA_TEXT)
+            findNavController(R.id.nav_host_fragment).navigate(
+                R.id.actionFeedFragmentToNewVideoFragment,
                 Bundle().apply {
                     textArg = text
                 }

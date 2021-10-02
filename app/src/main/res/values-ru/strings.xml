@@ -18,6 +18,4 @@
     <string name="cansel">Отмена</string>
     <string name="playVideo">Включить видео</string>
     <string name="addVideo">Добавить видео</string>
-    <string name="action_feedFragment_to_newVideoFragment">Добавить видео</string>
-    <item name="action_feedFragment_to_newVideoFragment" type="id" />
 </resources>

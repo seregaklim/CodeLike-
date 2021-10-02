@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.EditPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
@@ -37,12 +38,12 @@ class FeedFragment : Fragment() {
         val adapter = PostsAdapter(object : OnInteractionListener {
 
             override fun onEdit(post: Post) {
-                findNavController().navigate(R.id.action_feedFragment_to_newEditFragment)
+                findNavController().navigate(R.id.actionFeedFragmentToEditPostFragment,Bundle().apply {textArg=post.content })
 
             }
 
             override fun onAddVideo(post: Post)  {
-                findNavController().navigate(R.id.action_feedFragment_to_newVideoFragment)
+                findNavController().navigate(R.id.actionFeedFragmentToNewVideoFragment,Bundle().apply {textArg=post.video })
             }
 
             override fun onPlayVideo(post: Post) {
@@ -64,6 +65,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onShare(post: Post) {
+               viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
@@ -81,7 +83,7 @@ class FeedFragment : Fragment() {
         }
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            findNavController().navigate(R.id.actionFeedFragmentToNewPostFragment)
         }
 
         return binding.root

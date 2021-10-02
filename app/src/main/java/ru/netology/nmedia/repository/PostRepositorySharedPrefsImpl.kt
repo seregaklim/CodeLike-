@@ -1,3 +1,4 @@
+
 package ru.netology.nmedia.repository
 
 import android.content.Context
@@ -63,9 +64,6 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
-
-
-
     override fun shareById(id: Long) {
         posts = posts.map {
             if (it.id != id) it
@@ -74,8 +72,45 @@ class PostRepositorySharedPrefsImpl(
         data.value = posts
         sync()
     }
+    override fun edit(post: Post ) {
+        posts = listOf(
+            post.copy(
+
+            )
+        )
+
+        data.value = posts
 
 
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content)
+        }
+        data.value = posts
+        sync()
+        return
+    }
+
+    override fun addVideo(post: Post) {
+        posts = listOf(
+            post.copy(
+
+            )
+        )
+
+        data.value = posts
+        sync()
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video)
+        }
+        data.value = posts
+        sync()
+
+    }
 
     private fun sync() {
         with(prefs.edit()) {
@@ -84,4 +119,3 @@ class PostRepositorySharedPrefsImpl(
         }
     }
 }
-

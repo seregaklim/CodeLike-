@@ -17,8 +17,5 @@
     <string name="cansel">Cansel</string>
     <string name="playVideo">Play Video</string>
     <string name="addVideo">Add Video</string>
-    <string name="action_feedFragment_to_newVideoFragment">Add Video</string>
 
-    <item name="action_feedFragment_to_newVideoFragment" type="id" />
-    <item name="action_feedFragment_to_newEditFragment" type="id" />
 </resources>

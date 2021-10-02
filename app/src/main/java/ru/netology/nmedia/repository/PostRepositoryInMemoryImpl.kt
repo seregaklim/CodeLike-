@@ -148,7 +148,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 
+    override fun edit(post: Post ) {
+        posts = listOf(
+            post.copy(
 
+            )
+        )
+
+        data.value = posts
+
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content)
+        }
+        data.value = posts
+
+    }
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }
         data.value = posts
@@ -171,9 +188,27 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+
+    override fun addVideo(post: Post) {
+        posts = listOf(
+            post.copy(
+
+            )
+        )
+
+        data.value = posts
+
+
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video)
+        }
+        data.value = posts
+    }
+
+
 }
-
-
 
 //    override fun canselContentById(id: Long) {
 //        posts = posts.map {
@@ -184,3 +219,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
 
 
+//    override fun edit(post: Post) {
+//        if (post.id ==post.id)  else post.copy(content = post.content)
+//        data.value = posts
+//
+//    }
