@@ -46,10 +46,10 @@ class PostViewHolder(
             content.text = post.content
 
             like.isChecked = post.likedByMe
-            like.text = "${service.zeroingOutLikes(post.likes)}"
+            like.text = "${service.zeroingOutLikes(post.likes.toLong())}"
 
             share.isChecked
-            share.text = "${service.zeroingOutShare(post.share)}"
+            share.text = "${service.zeroingOutShare(post.share.toLong())}"
 
 
             menu.setOnClickListener {

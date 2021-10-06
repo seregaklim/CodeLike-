@@ -7,10 +7,10 @@ data class Post(
     val published: String,
     val likedByMe: Boolean = false,
     val shareByMe: Boolean = false,
-    var likes: Long,
-    var share: Long,
-    val viewing: Long,
-    val video:String,
+    var likes: Int,
+    var share: Int,
+    val viewing: Int,
+    val video: String,
 
     )
 
