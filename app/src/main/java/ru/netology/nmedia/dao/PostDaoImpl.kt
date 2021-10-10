@@ -16,9 +16,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_VIDEO} TEXT NOT NULL,
-            ${PostColumns.COLUMN_SHARE}  INTEGER NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_VIDEO}  TEXT NOT NULL,
-             
+            ${PostColumns.COLUMN_SHARE}  INTEGER NOT NULL DEFAULT 0
+
         );
         """.trimIndent()
     }
@@ -32,7 +31,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         const val COLUMN_PUBLISHED = "published"
         const val COLUMN_LIKED_BY_ME = "likedByMe"
         const val COLUMN_LIKES = "likes"
-        const val COLUMN_SHARED_BY_ME = "sharedByMe"
+      //  const val COLUMN_SHARED_BY_ME = "sharedByMe"
         const val COLUMN_SHARE = "share"
         const val COLUMN_VIDEO = "video"
         //    const val COLUMN_VIEWING = "viewing"
@@ -44,7 +43,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_PUBLISHED,
             COLUMN_LIKED_BY_ME,
             COLUMN_LIKES,
-            COLUMN_SHARED_BY_ME,
+         //   COLUMN_SHARED_BY_ME,
             COLUMN_SHARE,
             COLUMN_VIDEO,
             //    COLUMN_VIEWING,
@@ -170,7 +169,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 published = getString(getColumnIndexOrThrow(PostColumns.COLUMN_PUBLISHED)),
                 likedByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKED_BY_ME)) != 0,
                 likes = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKES)),
-                sharedByMe =getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARED_BY_ME)) != 0,
+               // sharedByMe =getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARED_BY_ME)) != 0,
                 share = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARE)),
              //   viewing = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING)),
                 video =  getString(getColumnIndexOrThrow(PostColumns.COLUMN_VIDEO)),
