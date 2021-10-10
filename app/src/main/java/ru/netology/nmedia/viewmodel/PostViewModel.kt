@@ -13,20 +13,17 @@ private val empty = Post(
     author = "",
     likedByMe = false,
     published = "",
-    shareByMe = false,
+   sharedByMe = false,
     likes = 0,
     share = 0,
-    viewing = 0,
+//    viewing = 0,
     video = "",
 )
-
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     // упрощённый вариант
     private val repository: PostRepository = PostRepositorySQLiteImpl(
         AppDb.getInstance(application).postDao
     )
-
-
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
@@ -36,7 +33,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-
     fun edit() {
         edited.value?.let {
             repository.edit(it)

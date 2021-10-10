@@ -30,7 +30,21 @@ class PostRepositorySQLiteImpl(
         }
         data.value = posts
     }
+    override fun edit(post: Post) {
+        dao.edit(post.content)
+        posts = listOf(
+            post.copy(
 
+            )
+        )
+        data.value = posts
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                content = post.content
+            )
+        }
+        data.value = posts
+    }
     override fun likeById(id: Long) {
         dao.likeById(id)
         posts = posts.map {
@@ -48,46 +62,32 @@ class PostRepositorySQLiteImpl(
         data.value = posts
     }
 
-override fun edit(post: Post) {
-    dao.edit(post)
-    posts = listOf(
-        post.copy(
 
+
+    override fun addVideo(post: Post) {
+        dao.addVideo(post)
+        posts = listOf(
+            post.copy(
+
+            )
         )
-    )
-    data.value = posts
-    posts = posts.map {
-        if (it.id != post.id) it else it.copy(
-            content = post.content
-        )
+
+        data.value = posts
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(
+                video = post.video
+            )
+        }
+        data.value = posts
     }
-    data.value = posts
-}
 
-override fun addVideo(post: Post) {
-    dao.addVideo(post)
-    posts = listOf(
-        post.copy(
-
-        )
-    )
-
-    data.value = posts
-
-    posts = posts.map {
-        if (it.id != post.id) it else it.copy(
-            video = post.video
-        )
+    override fun shareById(id: Long) {
+        dao.shareById(id)
+        posts = posts.map {
+            if (it.id != id) it
+            else it.copy( share = it.share + 1)
+        }
+        data.value = posts
     }
-    data.value = posts
-}
-
-override fun shareById(id: Long) {
-    dao.shareById(id)
-    posts = posts.map {
-        if (it.id != id) it
-        else it.copy(shareByMe = !it.shareByMe, share = it.share + 1)
-    }
-    data.value = posts
-}
 }

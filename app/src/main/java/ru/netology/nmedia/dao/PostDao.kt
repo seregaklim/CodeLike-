@@ -1,5 +1,4 @@
 package ru.netology.nmedia.dao
-import java.io.Closeable
 import ru.netology.nmedia.dto.Post
 
 interface PostDao {
@@ -8,6 +7,6 @@ interface PostDao {
     fun likeById(id: Long)
     fun removeById(id: Long)
     fun shareById(id: Long)
-    fun edit(post: Post)
-    fun addVideo(post:Post)
+    fun edit(post: String)
+    fun addVideo(post:Post): Post
 }

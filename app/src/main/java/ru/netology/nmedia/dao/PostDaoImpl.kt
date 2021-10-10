@@ -14,14 +14,15 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_CONTENT} TEXT NOT NULL,
             ${PostColumns.COLUMN_PUBLISHED} TEXT NOT NULL,
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0
-            ${PostColumns.COLUMN_SHARED_BY_ME}BOOLEAN NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_SHARE} INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_VIDEO} TEXT NOT NULL,
-            ${PostColumns.COLUMN_VIEWING} INTEGER NOT NULL DEFAULT 0
+            ${PostColumns.COLUMN_SHARE}  INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_VIDEO}  TEXT NOT NULL,
+             
         );
         """.trimIndent()
     }
+
 
     object PostColumns {
         const val TABLE = "posts"
@@ -34,7 +35,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         const val COLUMN_SHARED_BY_ME = "sharedByMe"
         const val COLUMN_SHARE = "share"
         const val COLUMN_VIDEO = "video"
-        const val COLUMN_VIEWING = "viewing"
+        //    const val COLUMN_VIEWING = "viewing"
 
         val ALL_COLUMNS = arrayOf(
             COLUMN_ID,
@@ -46,9 +47,9 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_SHARED_BY_ME,
             COLUMN_SHARE,
             COLUMN_VIDEO,
-            COLUMN_VIEWING,
+            //    COLUMN_VIEWING,
 
-            )
+        )
     }
 
     override fun getAll(): List<Post> {
@@ -79,7 +80,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             put(PostColumns.COLUMN_AUTHOR, "Me")
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, "now")
-            put(PostColumns.COLUMN_VIDEO, "wwww.youtube")
+            put(PostColumns.COLUMN_VIDEO, "wwww.youtube.ru")
 
         }
         val id = db.replace(PostColumns.TABLE, null, values)
@@ -107,6 +108,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         """.trimIndent(), arrayOf(id)
         )
     }
+
     override fun shareById(id: Long) {
         db.execSQL(
             """
@@ -118,13 +120,38 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         )
     }
 
-    override fun edit(post: Post) {
+    override fun edit(post: String) {
 
     }
 
-    override fun addVideo(post: Post) {
 
+    override fun addVideo(post: Post): Post {
+        val values = ContentValues().apply {
+            if (post.id != post.id) {
+                put(PostColumns.COLUMN_ID, post.id)
+            }
+            // TODO: remove hardcoded values
+            put(PostColumns.COLUMN_AUTHOR, "Me")
+            put(PostColumns.COLUMN_CONTENT, post.content)
+            put(PostColumns.COLUMN_PUBLISHED, "now")
+            put(PostColumns.COLUMN_VIDEO, "wwww.youtube.ru")
+
+        }
+        val id = db.replace(PostColumns.TABLE, null, values)
+        db.query(
+            PostColumns.TABLE,
+            PostColumns.ALL_COLUMNS,
+            "${PostColumns.COLUMN_ID} = ?",
+            arrayOf(id.toString()),
+            null,
+            null,
+            null,
+        ).use {
+            it.moveToNext()
+            return map(it)
+        }
     }
+
 
     override fun removeById(id: Long) {
         db.delete(
@@ -143,9 +170,9 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 published = getString(getColumnIndexOrThrow(PostColumns.COLUMN_PUBLISHED)),
                 likedByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKED_BY_ME)) != 0,
                 likes = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKES)),
-                shareByMe =getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARED_BY_ME)) != 0,
+                sharedByMe =getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARED_BY_ME)) != 0,
                 share = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARE)),
-                viewing = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING)),
+             //   viewing = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING)),
                 video =  getString(getColumnIndexOrThrow(PostColumns.COLUMN_VIDEO)),
             )
         }
