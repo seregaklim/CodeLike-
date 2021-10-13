@@ -31,7 +31,7 @@ class PostRepositorySQLiteImpl(
         data.value = posts
     }
     override fun edit(post: Post) {
-        val id = post.id
+       val id = post.id
         val edit = dao.edit(post)
         posts = if(id== id) {
             listOf(edit)

@@ -78,7 +78,6 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, "now")
             put(PostColumns.COLUMN_VIDEO, "https://www.youtube.com")
-
         }
         val id = db.replace(PostColumns.TABLE, null, values)
         db.query(
@@ -144,7 +143,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
 
     override fun addVideo(post: Post): Post {
         val values = ContentValues().apply {
-            if (post.id != post.id) {
+            if (post.id == post.id) {
                 put(PostColumns.COLUMN_ID, post.id)
             }
             // TODO: remove hardcoded values

@@ -32,13 +32,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-    fun edit() {
-        edited.value?.let {
-            repository.edit(it)
-        }
-        edited.value = empty
-    }
 
+    fun edit(id: Long) {
+
+        if (empty.id == id) {
+            edited.value?.let {
+                repository.edit(it)
+            }
+
+            edited.value = empty
+        }
+    }
     fun changeContent(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
@@ -51,12 +55,13 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
 
-    fun addVideo() {
-
-        edited.value?.let {
-            repository.addVideo(it)
+    fun addVideo(id: Long) {
+        if (empty.id == id) {
+            edited.value?.let {
+                repository.addVideo(it)
+            }
+            edited.value = empty
         }
-        edited.value = empty
     }
     fun changeVideo(video: String) {
         val text = video.trim()
