@@ -7,6 +7,6 @@ interface PostDao {
     fun likeById(id: Long)
     fun removeById(id: Long)
     fun shareById(id: Long)
-    fun edit(post: String)
+    fun edit(post: Post):Post
     fun addVideo(post:Post): Post
 }

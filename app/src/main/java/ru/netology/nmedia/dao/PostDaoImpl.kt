@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import ru.netology.nmedia.dto.Post
 
+
 class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
     companion object {
         val DDL = """
@@ -16,8 +17,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_VIDEO} TEXT NOT NULL,
-            ${PostColumns.COLUMN_SHARE}  INTEGER NOT NULL DEFAULT 0
-
+            ${PostColumns.COLUMN_SHARE} INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_VIEWING} INTEGER NOT NULL DEFAULT 0
         );
         """.trimIndent()
     }
@@ -31,10 +32,9 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         const val COLUMN_PUBLISHED = "published"
         const val COLUMN_LIKED_BY_ME = "likedByMe"
         const val COLUMN_LIKES = "likes"
-      //  const val COLUMN_SHARED_BY_ME = "sharedByMe"
         const val COLUMN_SHARE = "share"
         const val COLUMN_VIDEO = "video"
-        //    const val COLUMN_VIEWING = "viewing"
+        const val COLUMN_VIEWING = "viewing"
 
         val ALL_COLUMNS = arrayOf(
             COLUMN_ID,
@@ -43,11 +43,9 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_PUBLISHED,
             COLUMN_LIKED_BY_ME,
             COLUMN_LIKES,
-         //   COLUMN_SHARED_BY_ME,
             COLUMN_SHARE,
             COLUMN_VIDEO,
-            //    COLUMN_VIEWING,
-
+            COLUMN_VIEWING
         )
     }
 
@@ -79,7 +77,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             put(PostColumns.COLUMN_AUTHOR, "Me")
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, "now")
-            put(PostColumns.COLUMN_VIDEO, "wwww.youtube.ru")
+            put(PostColumns.COLUMN_VIDEO, "https://www.youtube.com")
 
         }
         val id = db.replace(PostColumns.TABLE, null, values)
@@ -110,18 +108,38 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
 
     override fun shareById(id: Long) {
         db.execSQL(
-            """
+        """
            UPDATE posts SET
-               share = share + CASE WHEN sharedByMe THEN -1 ELSE 1 END,
-               sharedByMe = CASE WHEN sharedByMe THEN 0 ELSE 1 END
+            share = +1 
            WHERE id = ?;
         """.trimIndent(), arrayOf(id)
         )
     }
 
-    override fun edit(post: String) {
+    override fun edit(post: Post):Post {
+        val values = ContentValues().apply {
+            if (post.id ==post.id) {
+                put(PostColumns.COLUMN_ID, post.id)
+            }
 
-    }
+            // TODO: remove hardcoded values
+            put(PostColumns.COLUMN_CONTENT, post.content)
+        }
+        val id = db.replace(PostColumns.TABLE, null, values)
+        db.query(
+            PostColumns.TABLE,
+            PostColumns.ALL_COLUMNS,
+            "${PostColumns.COLUMN_ID} = ?",
+            arrayOf(id.toString()),
+            null,
+            null,
+            null,
+        ).use {
+            it.moveToNext()
+            return map(it)
+        }
+
+        }
 
 
     override fun addVideo(post: Post): Post {
@@ -130,10 +148,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 put(PostColumns.COLUMN_ID, post.id)
             }
             // TODO: remove hardcoded values
-            put(PostColumns.COLUMN_AUTHOR, "Me")
-            put(PostColumns.COLUMN_CONTENT, post.content)
-            put(PostColumns.COLUMN_PUBLISHED, "now")
-            put(PostColumns.COLUMN_VIDEO, "wwww.youtube.ru")
+
+            put(PostColumns.COLUMN_VIDEO, post.video)
 
         }
         val id = db.replace(PostColumns.TABLE, null, values)
@@ -169,10 +185,9 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 published = getString(getColumnIndexOrThrow(PostColumns.COLUMN_PUBLISHED)),
                 likedByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKED_BY_ME)) != 0,
                 likes = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKES)),
-               // sharedByMe =getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARED_BY_ME)) != 0,
                 share = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARE)),
-             //   viewing = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING)),
-                video =  getString(getColumnIndexOrThrow(PostColumns.COLUMN_VIDEO)),
+                video = getString(getColumnIndexOrThrow(PostColumns.COLUMN_VIDEO)),
+                viewing = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING))
             )
         }
     }
