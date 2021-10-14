@@ -23,7 +23,6 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         """.trimIndent()
     }
 
-
     object PostColumns {
         const val TABLE = "posts"
         const val COLUMN_ID = "id"
@@ -77,7 +76,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             put(PostColumns.COLUMN_AUTHOR, "Me")
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, "now")
-            put(PostColumns.COLUMN_VIDEO, "https://www.youtube.com")
+            put(PostColumns.COLUMN_VIDEO,  post.video)
         }
         val id = db.replace(PostColumns.TABLE, null, values)
         db.query(
@@ -107,65 +106,13 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
 
     override fun shareById(id: Long) {
         db.execSQL(
-        """
+            """
            UPDATE posts SET
             share = +1 
            WHERE id = ?;
         """.trimIndent(), arrayOf(id)
         )
     }
-
-    override fun edit(post: Post):Post {
-        val values = ContentValues().apply {
-            if (post.id ==post.id) {
-                put(PostColumns.COLUMN_ID, post.id)
-            }
-
-            // TODO: remove hardcoded values
-            put(PostColumns.COLUMN_CONTENT, post.content)
-        }
-        val id = db.replace(PostColumns.TABLE, null, values)
-        db.query(
-            PostColumns.TABLE,
-            PostColumns.ALL_COLUMNS,
-            "${PostColumns.COLUMN_ID} = ?",
-            arrayOf(id.toString()),
-            null,
-            null,
-            null,
-        ).use {
-            it.moveToNext()
-            return map(it)
-        }
-
-        }
-
-
-    override fun addVideo(post: Post): Post {
-        val values = ContentValues().apply {
-            if (post.id == post.id) {
-                put(PostColumns.COLUMN_ID, post.id)
-            }
-            // TODO: remove hardcoded values
-
-            put(PostColumns.COLUMN_VIDEO, post.video)
-
-        }
-        val id = db.replace(PostColumns.TABLE, null, values)
-        db.query(
-            PostColumns.TABLE,
-            PostColumns.ALL_COLUMNS,
-            "${PostColumns.COLUMN_ID} = ?",
-            arrayOf(id.toString()),
-            null,
-            null,
-            null,
-        ).use {
-            it.moveToNext()
-            return map(it)
-        }
-    }
-
 
     override fun removeById(id: Long) {
         db.delete(

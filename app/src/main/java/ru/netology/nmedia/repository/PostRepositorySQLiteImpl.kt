@@ -30,21 +30,8 @@ class PostRepositorySQLiteImpl(
         }
         data.value = posts
     }
-    override fun edit(post: Post) {
-       val id = post.id
-        val edit = dao.edit(post)
-        posts = if(id== id) {
-            listOf(edit)
 
-        }else {
-            posts.map {
-                if (it.id != post.id) it else edit.copy( content = post.content)
-            }
-        }
-        data.value = posts
-    }
-
-    override fun likeById(id: Long) {
+override fun likeById(id: Long) {
         dao.likeById(id)
         posts = posts.map {
             if (it.id != id) it else it.copy(
@@ -58,21 +45,6 @@ class PostRepositorySQLiteImpl(
     override fun removeById(id: Long) {
         dao.removeById(id)
         posts = posts.filter { it.id != id }
-        data.value = posts
-    }
-
-    override fun addVideo(post: Post) {
-
-        val id = post.id
-        val addVideo = dao.addVideo(post)
-        posts = if(id== id) {
-            listOf(addVideo)
-
-        }else {
-            posts.map {
-                if (it.id != post.id) it else addVideo.copy( video = post.video)
-            }
-        }
         data.value = posts
     }
 

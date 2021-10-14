@@ -39,8 +39,7 @@ class NewVideoFragment : Fragment() {
 
         binding.ok.setOnClickListener {
             viewModel.changeVideo(binding.edit.text.toString())
-            viewModel.addVideo(id.toLong())
-
+            viewModel.save()
 
             AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()

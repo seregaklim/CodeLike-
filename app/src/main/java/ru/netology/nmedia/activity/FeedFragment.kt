@@ -37,12 +37,13 @@ class FeedFragment : Fragment() {
 
         val adapter = PostsAdapter(object : OnInteractionListener {
 
+
             override fun onEdit(post: Post) {
-                findNavController().navigate(R.id.actionFeedFragmentToEditPostFragment,Bundle().apply {textArg=post.content })
-
+                viewModel.edit(post)
+                findNavController().navigate(R.id.actionFeedFragmentToEditPostFragment, Bundle().apply { textArg = post.content })
             }
-
             override fun onAddVideo(post: Post)  {
+               viewModel.addVideo(post)
                 findNavController().navigate(R.id.actionFeedFragmentToNewVideoFragment,Bundle().apply {textArg=post.video })
             }
 
