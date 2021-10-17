@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.EditPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
@@ -83,6 +84,10 @@ class FeedFragment : Fragment() {
             adapter.submitList(posts)
         }
 
+        //Подписка на отдельный пост на id=1
+        viewModel.getPost(id=1).observe(viewLifecycleOwner){
+            Snackbar.make(binding.root,it.toString(),Snackbar.LENGTH_LONG).show()
+        }
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.actionFeedFragmentToNewPostFragment)
         }

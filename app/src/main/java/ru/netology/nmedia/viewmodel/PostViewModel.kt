@@ -18,10 +18,11 @@ private val empty = Post(
     viewing = 0,
     video = "https://www.youtube.com"
 )
+
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     // упрощённый вариант
-    private val repository: PostRepository = PostRepositorySQLiteImpl(
-        AppDb.getInstance(application).postDao
+    private val repository: PostRepository = PostRepositoryImpl(
+        AppDb.getInstance(context = application).postDao()
     )
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
@@ -61,4 +62,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = edited.value?.copy(video = text)
     }
+     //Подписка на отдельный пост
+    fun getPost(id: Long) = repository.getPost(id)
 }

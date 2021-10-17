@@ -125,21 +125,21 @@
 
         <VideoView
             android:id="@+id/VideoView"
-            android:layout_width="451dp"
-            android:layout_height="305dp"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/content"
             tools:srcCompat="@android:drawable/sym_def_app_icon" />
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/playVideo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="125dp"
             android:clickable="true"
-            app:layout_constraintEnd_toEndOf="@+id/VideoView"
             app:layout_constraintStart_toStartOf="@+id/VideoView"
             app:layout_constraintTop_toBottomOf="@+id/content"
             app:srcCompat="@android:drawable/ic_menu_slideshow"
