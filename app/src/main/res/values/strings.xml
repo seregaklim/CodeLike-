@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Code Like</string>
+//...........Activity 1..................//
+    <string name="app_name" >НМедиа</string>
+    <string name="NMedia"  > НМедиа!</string>
 </resources>
